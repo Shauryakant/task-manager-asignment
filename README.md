@@ -2,6 +2,11 @@
 
 This is a separate full-stack project created for the `Full_Stack_Assignment_Advanced_260225_013337 (1).pdf` requirements. It does not modify the earlier `PROJECT-MANAGE` app.
 
+## Live Links
+
+- Live URL: `https://task-manager-asignment.onrender.com`
+- GitHub Repository: `https://github.com/Shauryakant/task-manager-asignment`
+
 ## What It Includes
 
 - Node.js + Express backend
@@ -177,9 +182,9 @@ Cookie: accessToken=...
 }
 ```
 
-## Remaining Submission Work
+## Deployment
 
-- install dependencies
-- run and verify locally with a MongoDB instance
-- deploy publicly
-- add live URL and repository URL to this README
+The application is deployed on Render and serves both the frontend and backend from a single Node.js web service:
+
+- Live app: `https://task-manager-asignment.onrender.com`
+- Health endpoint: `https://task-manager-asignment.onrender.com/api/health`
