@@ -20,6 +20,16 @@ This is a separate full-stack project created for the `Full_Stack_Assignment_Adv
 - protected frontend UI served from the same Express app
 - structured validation and error handling
 
+## Frontend Features
+
+- register and login forms
+- protected dashboard after authentication
+- create, edit, delete, and view personal tasks
+- filter tasks by status
+- search tasks by title
+- paginate task list results
+- automatic session restore using cookie-based auth
+
 ## Project Structure
 
 ```text
@@ -69,6 +79,12 @@ Open `http://localhost:8000`.
 - Every read, update, and delete operation is filtered by both `taskId` and `req.user._id`.
 - Task descriptions are encrypted at write time and decrypted only when returned to the authenticated owner.
 
+## Authorization Model
+
+- Each user can access only their own tasks.
+- Task queries are always scoped to the logged-in user.
+- Even if a valid task ID is guessed manually, another user cannot read, edit, or delete that task unless it belongs to their account.
+
 ## Security Notes
 
 - `httpOnly` cookies are used for both access and refresh tokens.
@@ -76,6 +92,8 @@ Open `http://localhost:8000`.
 - Passwords are hashed with bcrypt.
 - Validation is enforced with `express-validator`.
 - MongoDB queries are built with scoped conditions to prevent users from accessing other users' tasks.
+- Sensitive task descriptions are encrypted before being stored in the database.
+- AES-256-GCM is used so stored descriptions are not kept in plain text.
 
 ## API Summary
 
@@ -188,3 +206,28 @@ The application is deployed on Render and serves both the frontend and backend f
 
 - Live app: `https://task-manager-asignment.onrender.com`
 - Health endpoint: `https://task-manager-asignment.onrender.com/api/health`
+
+## Render Deployment Steps
+
+1. Push the repository to GitHub.
+2. Create a new Render `Web Service`.
+3. Connect the GitHub repository: `https://github.com/Shauryakant/task-manager-asignment`
+4. Use:
+   - Build Command: `npm install`
+   - Start Command: `npm start`
+   - Root Directory: leave empty
+5. Add environment variables in Render:
+   - `MONGODB_URI`
+   - `ACCESS_TOKEN_SECRET`
+   - `REFRESH_TOKEN_SECRET`
+   - `TASK_ENCRYPTION_KEY`
+   - `NODE_ENV=production`
+6. Deploy and verify the health route and UI.
+
+## Future Improvements
+
+- add automated API and UI tests
+- add email verification and password reset flow
+- add rate limiting for authentication endpoints
+- add task due dates and sorting options
+- replace the simple static frontend with a component-based frontend framework if the project grows
