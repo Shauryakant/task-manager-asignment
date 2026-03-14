@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TaskFlow Secure</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/assets/styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <aside class="hero-panel">
+        <p class="eyebrow">Full Stack Assignment</p>
+        <h1>TaskFlow Secure</h1>
+        <p class="hero-copy">
+          A focused task manager with JWT auth, HTTP-only cookies, encrypted task
+          descriptions, and protected routes.
+        </p>
+        <div class="hero-points">
+          <span>Encrypted descriptions</span>
+          <span>Search and filters</span>
+          <span>Pagination</span>
+        </div>
+      </aside>
+
+      <main class="app-panel">
+        <section id="authView" class="view active">
+          <div class="panel-header">
+            <div>
+              <p class="section-kicker">Access</p>
+              <h2>Register or sign in</h2>
+            </div>
+          </div>
+
+          <div class="auth-grid">
+            <form id="registerForm" class="card form-card">
+              <h3>Create account</h3>
+              <label>
+                <span>Name</span>
+                <input name="name" type="text" placeholder="Aman Patel" required />
+              </label>
+              <label>
+                <span>Email</span>
+                <input name="email" type="email" placeholder="aman@example.com" required />
+              </label>
+              <label>
+                <span>Password</span>
+                <input
+                  name="password"
+                  type="password"
+                  placeholder="Example: DemoPass1"
+                  required
+                />
+              </label>
+              <div class="password-hint">
+                <p>Password requirements</p>
+                <ul>
+                  <li>At least 8 characters</li>
+                  <li>One uppercase letter</li>
+                  <li>One lowercase letter</li>
+                  <li>One number</li>
+                </ul>
+              </div>
+              <button type="submit">Register</button>
+            </form>
+
+            <form id="loginForm" class="card form-card">
+              <h3>Sign in</h3>
+              <label>
+                <span>Email</span>
+                <input name="email" type="email" placeholder="aman@example.com" required />
+              </label>
+              <label>
+                <span>Password</span>
+                <input name="password" type="password" placeholder="Your password" required />
+              </label>
+              <button type="submit">Login</button>
+            </form>
+          </div>
+        </section>
+
+        <section id="dashboardView" class="view">
+          <div class="panel-header">
+            <div>
+              <p class="section-kicker">Dashboard</p>
+              <h2 id="welcomeText">Your tasks</h2>
+            </div>
+            <button id="logoutButton" class="ghost-button">Logout</button>
+          </div>
+
+          <div class="dashboard-grid">
+            <form id="taskForm" class="card form-card">
+              <h3 id="taskFormTitle">Create task</h3>
+              <input type="hidden" name="taskId" />
+              <label>
+                <span>Title</span>
+                <input name="title" type="text" placeholder="Finish assignment README" required />
+              </label>
+              <label>
+                <span>Description</span>
+                <textarea
+                  name="description"
+                  rows="5"
+                  placeholder="This field is AES-encrypted before it is stored in MongoDB."
+                ></textarea>
+              </label>
+              <label>
+                <span>Status</span>
+                <select name="status">
+                  <option value="todo">Todo</option>
+                  <option value="in_progress">In Progress</option>
+                  <option value="done">Done</option>
+                </select>
+              </label>
+              <div class="button-row">
+                <button type="submit">Save task</button>
+                <button type="button" id="cancelEditButton" class="ghost-button hidden">
+                  Cancel
+                </button>
+              </div>
+            </form>
+
+            <div class="card task-list-card">
+              <div class="toolbar">
+                <input id="searchInput" type="text" placeholder="Search by title" />
+                <select id="statusFilter">
+                  <option value="">All statuses</option>
+                  <option value="todo">Todo</option>
+                  <option value="in_progress">In Progress</option>
+                  <option value="done">Done</option>
+                </select>
+              </div>
+
+              <div id="taskList" class="task-list"></div>
+
+              <div class="pagination-row">
+                <button id="prevPageButton" class="ghost-button">Previous</button>
+                <span id="pageLabel">Page 1</span>
+                <button id="nextPageButton" class="ghost-button">Next</button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div id="toast" class="toast hidden"></div>
+    <script type="module" src="/assets/app.js"></script>
+  </body>
+</html>
